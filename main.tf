@@ -68,8 +68,6 @@ resource "abbey_identity" "user_1" {
   )
 }
 
-data "aws_iam_group" "group1" {
-  group_name = "group1"
+data "aws_iam_group" "readergroup" {
+  group_name = "readergroup"
 }
-
-

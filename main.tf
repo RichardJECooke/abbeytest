@@ -25,9 +25,7 @@ provider "abbey" {
   bearer_auth = var.abbey_token
 }
 
-provider "aws" {
-  region = "us-west-2" #CHANGEME
-}
+provider "aws" { region = "eu-west-1" }
 
 resource "abbey_grant_kit" "IAM_membership" {
   name = "IAM_membership"
@@ -41,7 +39,7 @@ resource "abbey_grant_kit" "IAM_membership" {
     steps = [
       {
         reviewers = {
-          one_of = ["replace-me@example.com"]
+          one_of = ["richardjecooke@pm.me"]
         }
       }
     ]
@@ -50,7 +48,7 @@ resource "abbey_grant_kit" "IAM_membership" {
   output = {
     # Replace with your own path pointing to where you want your access changes to manifest.
     # Path is an RFC 3986 URI, such as `github://{organization}/{repo}/path/to/file.tf`.
-    location = "github://replace-me-with-organization/replace-me-with-repo/access.tf" #CHANGEME
+    location = "github://RichardJECooke/abbeytest/access.tf"
     append = <<-EOT
       resource "aws_iam_user_group_membership" "user_{{ .data.system.abbey.identities.aws_iam.name }}_group_${data.aws_iam_group.group1.group_name}" {
         user = "{{ .data.system.abbey.identities.aws_iam.name }}"
@@ -61,11 +59,11 @@ resource "abbey_grant_kit" "IAM_membership" {
 }
 
 resource "abbey_identity" "user_1" {
-  abbey_account = "replace-me@example.com"
+  abbey_account = "richardjecooke@pm.me"
   source = "aws_iam"
   metadata = jsonencode(
     {
-      name = "ReplaceWithAWSIamName" #CHANGEME
+      name = "arn:aws:iam::038824608327:user/carol"
     }
   )
 }

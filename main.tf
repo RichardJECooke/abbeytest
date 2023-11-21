@@ -78,7 +78,7 @@ resource "abbey_identity" "user_1" {
   source = "aws_iam"
   metadata = jsonencode(
     {
-      name = "carol"
+      name = "eve"
     }
   )
 }

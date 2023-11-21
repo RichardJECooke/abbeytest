@@ -35,6 +35,21 @@ resource "abbey_grant_kit" "IAM_membership" {
     from a list of reviewers to approve access.
   EOT
 
+  policies = [
+    {
+      query = <<-EOT
+        package common
+
+        import data.abbey.functions
+
+        allow[msg] {
+          functions.expire_after("5m")
+          msg := "Grant access for 5 minutes."
+        }
+      EOT
+    }
+  ]
+
   workflow = {
     steps = [
       {
